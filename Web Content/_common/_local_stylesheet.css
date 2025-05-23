@@ -1,0 +1,115 @@
+@charset "UTF-8";
+
+/*
+	################################################################################
+	##
+	## For mdc-default.css version 2025-04-12.mdc-14_v3_wazetools
+	##
+	################################################################################
+*/
+
+@media (max-width: 479px)							{ :root { --font-size: 12px; --font-color: #111111; }}
+@media (min-width: 480px) and (max-width: 839px)	{ :root { --font-size: 14px; --font-color: #222222; }}
+@media (min-width: 840px)							{ :root { --font-size: 16px; --font-color: #333333; }}
+
+:root {
+/*
+	LAYOUT
+*/
+	--layout-max-width: 1250px;
+/*
+	THEME
+*/
+	--mdc-theme-primary: #2d4d71;
+	--mdc-theme-primary-light: #4f83cc;
+	--mdc-theme-primary-dark: #002f6c;
+	--mdc-theme-secondary: #ad1457;
+	--mdc-theme-secondary-light: #e35183;
+	--mdc-theme-secondary-dark: #78002e;
+	--mdc-theme-background: #ffffff;
+/*
+	GRID
+*/
+	--mdc-layout-grid-gutter-desktop: 16px;
+/*
+	BODY
+*/
+	--body-background-color: #ffffff;
+	--body-background-image: url("../images/page-background.png");
+	--body-background-repeat: repeat-x;
+	--body-background-attachment: scroll;
+/*
+	LINKS
+*/
+	--link-color-normal: #007dc1;
+	--link-color-visited: #007dc1;
+	--link-color-hover: #004d99;
+	--link-color-active: #004d99;
+/*
+	TABLES
+*/
+	--table-head-1-bgcol: #e9e9e9;
+	--table-head-2-bgcol: #f7f7f7;
+	--table-footer-bgcol: #e9e9e9;
+	--table-border-color: #cccccc;
+/*
+	ICONS
+*/
+	--icon-size: calc(var(--font-size) * 3.5);
+	--icon-color: #438da3;
+	--icon-color-disabled: #cccccc;
+	--icon-text-size: calc(var(--font-size) * 1.5);
+	--icon-text-color: #4a9cb5;
+	--icon-text-color-disabled: #cccccc;
+/*
+	GUTTER
+*/
+	--mdc-layout-grid-gutter-desktop: 16px;
+/*
+	BORDERS
+*/
+	--border-color: #cccccc;
+}
+
+/*
+	jQueryUI modifiers
+*/
+.ui-accordion .ui-accordion-content {
+	padding: 8px;
+}
+.ui-widget {
+	background-color: white !important;
+}
+.ui-widget-content {
+	background-color: white !important;
+}
+
+/*
+	Other
+*/
+.DS-menubtn-div {
+	position: absolute;
+	padding: 5px;
+}
+.DS-options-div {
+	position: absolute;
+	padding: 5px;
+	background-color: white;
+	box-shadow: 3px 3px 5px #888888;
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+}
+.DS-ajax-loader-div {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	z-index: 1000;
+	padding: 5px;
+	background-color: white;
+	box-shadow: 3px 3px 5px #888888;
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	width: 100px;
+	height: 70px;
+	margin: -35px 0 0 -50px;
+}
