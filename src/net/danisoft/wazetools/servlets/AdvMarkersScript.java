@@ -8,6 +8,7 @@
 //       Revised: Jan/2024 Moved to V3
 //       Revised: Mar/2025 Ported to Waze dslib.jar
 //                         Changed to @WebServlet style
+//       Revised: Jun/2025 Enabled request filtering by user country
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -22,7 +23,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 import net.danisoft.dslib.Database;
@@ -31,9 +31,6 @@ import net.danisoft.dslib.FmtTool;
 import net.danisoft.dslib.SysTool;
 import net.danisoft.wazetools.ureq.Request;
 import net.danisoft.wazetools.ureq.SvgMapMarker;
-import net.danisoft.wtlib.auth.GeoIso;
-import net.danisoft.wtlib.auth.User;
-import net.danisoft.wtlib.auth.WazerConfig;
 
 @WebServlet(description = "Generate Advanced Markers Script", urlPatterns = { "/servlet/AdvMarkersScript" })
 
@@ -60,9 +57,6 @@ public class AdvMarkersScript extends HttpServlet {
 		try {
 
 			DB = new Database();
-
-			User USR = new User(DB.getConnection());
-			GeoIso GEO = new GeoIso(DB.getConnection());
 			Request REQ = new Request(DB.getConnection());
 
 			String mapObjName = EnvTool.getStr(request, "mapObjName", "");
