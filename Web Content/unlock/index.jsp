@@ -148,9 +148,9 @@
 						},
 
 						error: function(jqXHR, textStatus, errorThrown) {
-							console.error('DrawRequestMarkers() Error: jqXHR: %o', jqXHR);
-							console.error('DrawRequestMarkers() Error: textStatus: %o', textStatus);
-							console.error('DrawRequestMarkers() Error: errorThrown: %o', errorThrown);
+							console.error('[/unlock/index.jsp] AdvMarkersScript Error: jqXHR: %o', jqXHR);
+							console.error('[/unlock/index.jsp] AdvMarkersScript Error: textStatus: %o', textStatus);
+							console.error('[/unlock/index.jsp] AdvMarkersScript Error: errorThrown: %o', errorThrown);
 						},
 
 						complete: function(jqXHR, textStatus) {
@@ -160,9 +160,9 @@
 				},
 
 				error: function(jqXHR, textStatus, errorThrown) {
-					console.error('DrawUserAreaPaths() Error: jqXHR: %o', jqXHR);
-					console.error('DrawUserAreaPaths() Error: textStatus: %o', textStatus);
-					console.error('DrawUserAreaPaths() Error: errorThrown: %o', errorThrown);
+					console.error('[/unlock/index.jsp] UserAreaPaths Error: jqXHR: %o', jqXHR);
+					console.error('[/unlock/index.jsp] UserAreaPaths Error: textStatus: %o', textStatus);
+					console.error('[/unlock/index.jsp] UserAreaPaths Error: errorThrown: %o', errorThrown);
 				}
 			});
 		}
