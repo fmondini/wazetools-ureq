@@ -22,6 +22,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import net.danisoft.dslib.Database;
@@ -30,6 +31,9 @@ import net.danisoft.dslib.FmtTool;
 import net.danisoft.dslib.SysTool;
 import net.danisoft.wazetools.ureq.Request;
 import net.danisoft.wazetools.ureq.SvgMapMarker;
+import net.danisoft.wtlib.auth.GeoIso;
+import net.danisoft.wtlib.auth.User;
+import net.danisoft.wtlib.auth.WazerConfig;
 
 @WebServlet(description = "Generate Advanced Markers Script", urlPatterns = { "/servlet/AdvMarkersScript" })
 
@@ -57,7 +61,10 @@ public class AdvMarkersScript extends HttpServlet {
 
 			DB = new Database();
 
+			User USR = new User(DB.getConnection());
+			GeoIso GEO = new GeoIso(DB.getConnection());
 			Request REQ = new Request(DB.getConnection());
+
 			String mapObjName = EnvTool.getStr(request, "mapObjName", "");
 			JSONObject jCfg = new JSONObject(EnvTool.getStr(request, "jCfg", "{}"));
 
@@ -66,20 +73,40 @@ public class AdvMarkersScript extends HttpServlet {
 			//
 
 			boolean CanBeShown;
+			GeoIso.Data geoData;
 
-			Vector<Request.Data> vecReqData = REQ.getAll(
-				"IT", // TODO Country Filter in REQ.getAll()
-				(jCfg.getBoolean("jCfg-ShowAreaAll") // Show ALL areas flag
-					? ""
-					: SysTool.getCurrentUser(request)
-				),
-				jCfg.getBoolean("jCfg-LayerShowOpen"),
-				jCfg.getBoolean("jCfg-LayerShowWork"),
-				jCfg.getBoolean("jCfg-LayerShowInfo"),
-				jCfg.getBoolean("jCfg-LayerShowRjct"),
-				jCfg.getBoolean("jCfg-LayerShowRchk"),
-				jCfg.getBoolean("jCfg-LayerShowDone")
-			);
+			User.Data usrData = USR.Read(SysTool.getCurrentUser(request));
+			WazerConfig wazerConfig = usrData.getWazerConfig();
+			JSONArray jaActvCtry = wazerConfig.getUreq().getActiveCountries();
+
+			Vector<Request.Data> vecTmpData;
+			Vector<Request.Data> vecReqData = new Vector<Request.Data>();
+
+			// Read ALL enabled countries
+
+			for (int i = 0; i < jaActvCtry.length(); i++) {
+
+				geoData = GEO.Read(jaActvCtry.getString(i));
+
+				vecTmpData = REQ.getAll(
+					geoData.getIso2(),
+					(jCfg.getBoolean("jCfg-ShowAreaAll") // Show ALL areas flag
+						? ""
+						: SysTool.getCurrentUser(request)
+					),
+					jCfg.getBoolean("jCfg-LayerShowOpen"),
+					jCfg.getBoolean("jCfg-LayerShowWork"),
+					jCfg.getBoolean("jCfg-LayerShowInfo"),
+					jCfg.getBoolean("jCfg-LayerShowRjct"),
+					jCfg.getBoolean("jCfg-LayerShowRchk"),
+					jCfg.getBoolean("jCfg-LayerShowDone")
+				);
+
+				for (Request.Data reqData : vecTmpData)
+					vecReqData.add(reqData);
+			}
+
+			// Create
 
 			for (Request.Data reqData : vecReqData) {
 
