@@ -71,25 +71,16 @@ public class AdvMarkersScript extends HttpServlet {
 			//
 			// Markers Array Loop
 			//
-
+			
 			boolean CanBeShown;
-			GeoIso.Data geoData;
-
-			User.Data usrData = USR.Read(SysTool.getCurrentUser(request));
-			WazerConfig wazerConfig = usrData.getWazerConfig();
-			JSONArray jaActvCtry = wazerConfig.getUreq().getActiveCountries();
-
 			Vector<Request.Data> vecTmpData;
 			Vector<Request.Data> vecReqData = new Vector<Request.Data>();
+			Vector<String> vecActvCtry = REQ.getActvCtryIso2(SysTool.getCurrentUser(request));
 
-			// Read ALL enabled countries
-
-			for (int i = 0; i < jaActvCtry.length(); i++) {
-
-				geoData = GEO.Read(jaActvCtry.getString(i));
+			for (String actvCtry : vecActvCtry) {
 
 				vecTmpData = REQ.getAll(
-					geoData.getIso2(),
+					actvCtry,
 					(jCfg.getBoolean("jCfg-ShowAreaAll") // Show ALL areas flag
 						? ""
 						: SysTool.getCurrentUser(request)

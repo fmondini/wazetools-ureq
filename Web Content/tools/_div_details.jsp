@@ -155,24 +155,32 @@
 		// Get data vector
 		//
 
-		Vector<Request.Data> vecReqData;
+		Vector<Request.Data> vecTmpData = new Vector<Request.Data>();
+		Vector<Request.Data> vecReqData = new Vector<Request.Data>();
+		Vector<String> vecActvCtry = REQ.getActvCtryIso2(SysTool.getCurrentUser(request));
 
-		if (isTypeLast) {
-			vecReqData = REQ.getRecent(
-				"", // TODO: Country Filter in REQ.getRecent()
-				(Request.isMyAreasOnly(request.getCookies()) ? SysTool.getCurrentUser(request) : ""),
-				DateMin,
-				DateMax
-			);
-		} else if (isTypeRchk) {
-			vecReqData = REQ.getRecheckQueue(
-				"IT", // TODO: Country Filter in REQ.getRecheckQueue()
-				(Request.isMyQueueOnly(request.getCookies()) ? SysTool.getCurrentUser(request) : null)
-			);
+		for (String actvCtry : vecActvCtry) {
 
-		} else
-			throw new Exception("Bad Type: '" + reqType + "'");
+			if (isTypeLast) {
+				vecTmpData = REQ.getRecent(
+					actvCtry,
+					(Request.isMyAreasOnly(request.getCookies()) ? SysTool.getCurrentUser(request) : ""),
+					DateMin,
+					DateMax
+				);
+			} else if (isTypeRchk) {
+				vecTmpData = REQ.getRecheckQueue(
+					actvCtry,
+					(Request.isMyQueueOnly(request.getCookies()) ? SysTool.getCurrentUser(request) : null)
+				);
 
+			} else
+				throw new Exception("Bad Type: '" + reqType + "'");
+
+			for (Request.Data reqData : vecTmpData)
+				vecReqData.add(reqData);
+		}
+		
 		// Show data
 
 		int ReqCount = 0;

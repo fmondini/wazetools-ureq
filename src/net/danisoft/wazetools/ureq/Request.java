@@ -36,7 +36,9 @@ import net.danisoft.dslib.LogTool;
 import net.danisoft.dslib.Mail;
 import net.danisoft.dslib.SlackMsg;
 import net.danisoft.dslib.SysTool;
+import net.danisoft.wtlib.auth.GeoIso;
 import net.danisoft.wtlib.auth.User;
+import net.danisoft.wtlib.auth.WazerConfig;
 import net.danisoft.wtlib.auth.WazerContacts;
 import net.danisoft.wazetools.AppCfg;
 
@@ -1132,6 +1134,33 @@ public class Request {
 		}
 
 		return(vecResults);
+	}
+
+	/**
+	 * Get Vector of ISO-2char active countries for a given user
+	 */
+	public Vector<String> getActvCtryIso2(String userName) {
+
+		User USR = new User(this.cn);
+		GeoIso GEO = new GeoIso(this.cn);
+
+		GeoIso.Data geoData;
+		User.Data usrData = USR.Read(userName);
+		WazerConfig wazerConfig = usrData.getWazerConfig();
+		JSONArray jaActvCtry = wazerConfig.getUreq().getActiveCountries();
+		Vector<String> vecCountries = new Vector<String>();
+
+		for (int i = 0; i < jaActvCtry.length(); i++) {
+
+			try {
+				geoData = GEO.Read(jaActvCtry.getString(i));
+				vecCountries.add(geoData.getIso2());
+			} catch (Exception e) {
+				System.err.println("Request.getActiveCountries('" + userName + "'): " + e.toString());
+			}
+		}
+
+		return(vecCountries);
 	}
 
 	/**
