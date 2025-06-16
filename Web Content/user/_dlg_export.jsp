@@ -49,7 +49,7 @@
 			"WHERE REQ_User = '" + export_user + "';"
 		);
 
-		st.executeUpdate("ALTER TABLE " + TMP_TBL_NAME + " ADD COLUMN REQ_Permalink VARCHAR(512) NOT NULL DEFAULT '' AFTER REQ_Cameras;");
+		st.executeUpdate("ALTER TABLE " + TMP_TBL_NAME + " ADD COLUMN REQ_Permalink VARCHAR(2048) NOT NULL DEFAULT '' AFTER REQ_Cameras;");
 
 		rs = st.executeQuery("SELECT * FROM " + TMP_TBL_NAME + ";");
 
