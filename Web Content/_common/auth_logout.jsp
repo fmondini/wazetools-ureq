@@ -23,7 +23,7 @@
 	if (!msg.equals(""))
 		newLocation += ("?msg=" + URLEncoder.encode(msg, "UTF-8"));
 
-	response.setStatus(301);
+	response.setStatus(HttpServletResponse.SC_TEMPORARY_REDIRECT);
 	response.setHeader("Location", newLocation);
 	response.setHeader("Connection", "close");
 %>
