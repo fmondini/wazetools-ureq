@@ -120,18 +120,30 @@
 					<div>Daily use of UREQ is very simple and straightforward:</div>
 				</div>
 				<div class="DS-card-body">
-					<ul class="DS-ul-padding">
-						<li class="DS-li-padding">Download and install the WUREQ Script for WME (see the download link)<br>
-							<span class="DS-text-small DS-text-italic">NOTE: The script requires
-							<a href="https://www.tampermonkey.net/" target="_blank">Tampermonkey</a>, a userscript manager by Jan Biniok.</span></li>
-						<li class="DS-li-padding">In WME select one or more objects and click on "UREQ" in the top buttons bar</li>
-						<li class="DS-li-padding">Enter a brief explanation of the reason for the request.
-							This can help our unlockers better understand your request</li>
-						<li class="DS-li-padding">Click on the "SEND" button</li>
-						<li class="DS-li-padding">Wait a few minutes and one of our high-level editors will take care of your request, solving it.
-							Our community have a team of qualified high-level editors and the average waiting queue is only a few minutes.
-							You will be (optionally) informed of the result by a PM in the Waze Forum</li>
-					</ul>
+					<div class="mdc-layout-grid__inner">
+						<div class="<%= MdcTool.Layout.Cell(10, 6, 3) %> DS-grid-top-left">
+							<ul class="DS-ul-padding">
+								<li class="DS-li-padding">Download and install the WUREQ Script for WME (see the download link)<br>
+									<span class="DS-text-small DS-text-italic">NOTE: The script requires
+									<a href="https://www.tampermonkey.net/" target="_blank">Tampermonkey</a>, a userscript manager by Jan Biniok.</span></li>
+								<li class="DS-li-padding">In WME select one or more objects and click on "UREQ" in the top buttons bar</li>
+								<li class="DS-li-padding">Enter a brief explanation of the reason for the request.
+									This can help our unlockers better understand your request</li>
+								<li class="DS-li-padding">Click on the "SEND" button</li>
+								<li class="DS-li-padding">Wait a few minutes and one of our high-level editors will take care of your request, solving it.
+									Our community have a team of qualified high-level editors and the average waiting queue is only a few minutes.
+									You will be (optionally) informed of the result by a PM in the Waze Forum</li>
+							</ul>
+						</div>
+						<div class="<%= MdcTool.Layout.Cell(2, 2, 1) %> DS-grid-top-center">
+							<div align="center">
+								<a <%= "download" %> href="../UREQ_Short_Guide_1.0.2025-06.pdf">
+									<img src="../images/096x096/pdf.png"><br>
+									<span class="DS-text-bold DS-text-italic">Download the<br>UREQ Quick Guide</span>
+								</a>
+							</div>
+						</div>
+					</div>
 				</div>
 				<div class="DS-card-body">
 					<div class="DS-text-huge">Other ways to send unlock requests</div>
