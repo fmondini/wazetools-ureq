@@ -163,8 +163,12 @@
 					console.error('[/unlock/index.jsp] UserAreaPaths Error: jqXHR: %o', jqXHR);
 					console.error('[/unlock/index.jsp] UserAreaPaths Error: textStatus: %o', textStatus);
 					console.error('[/unlock/index.jsp] UserAreaPaths Error: errorThrown: %o', errorThrown);
+				},
+
+				complete: function(jqXHR, textStatus) {
+					$('#divAjaxWait').hide();
 				}
-			});
+});
 		}
 
 	</script>
