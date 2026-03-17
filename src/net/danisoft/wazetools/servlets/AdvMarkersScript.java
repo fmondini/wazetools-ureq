@@ -9,6 +9,7 @@
 //       Revised: Mar/2025 Ported to Waze dslib.jar
 //                         Changed to @WebServlet style
 //       Revised: Jun/2025 Enabled request filtering by user country
+//       Revised: Mar/2026 Check added in jCfgReq read
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -60,12 +61,14 @@ public class AdvMarkersScript extends HttpServlet {
 			Request REQ = new Request(DB.getConnection());
 
 			String mapObjName = EnvTool.getStr(request, "mapObjName", "");
-			JSONObject jCfg = new JSONObject(EnvTool.getStr(request, "jCfg", "{}"));
+			String jCfgReq = EnvTool.getStr(request, "jCfg", "{}");
+
+			JSONObject jCfg = new JSONObject(jCfgReq.equals("") ? "{}" : jCfgReq);
 
 			//
 			// Markers Array Loop
 			//
-			
+
 			boolean CanBeShown;
 			Vector<Request.Data> vecTmpData;
 			Vector<Request.Data> vecReqData = new Vector<Request.Data>();
