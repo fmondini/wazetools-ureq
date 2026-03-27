@@ -159,7 +159,16 @@ public class AdvMarkersScript extends HttpServlet {
 
 		} catch (Exception e) {
 			System.err.println("AdvMarkersScript(): " + e.toString());
-			AllMarkers += "alert('+++ AdvMarkersScript() ERROR +++\\n\\n" + e.toString() + "')";
+			AllMarkers += "alert('" +
+				"+++ AdvMarkersScript() ERROR +++\\n" +
+				"\\n" +
+				e.toString() + "\\n" +
+				"\\n" +
+				"To resolve this issue:\\n" +
+				" - Click the gear icon (top right)\\n" +
+				" - Edit the configuration\\n" +
+				" - Save it" +
+			"')";
 		}
 
 		if (DB != null)
